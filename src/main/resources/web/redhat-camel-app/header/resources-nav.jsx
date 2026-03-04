@@ -4,15 +4,17 @@ import { Dropdown } from 'react-bootstrap';
 import {FaAngleDown} from 'react-icons/fa';
 import { getVersionFromStream, getLinksForVersion, VERSION_LINKS } from './version-links';
 
-export function ResourcesNav({ analytics, platformStream }) {
+export function ResourcesNav({ analytics, platformStream, platformStreamKey }) {
     // Check if this specific platform stream has configured links
     // Don't render if no links are configured for this version
-    if (platformStream && !VERSION_LINKS[platformStream]) {
+    console.log("platformStreamKey",platformStreamKey);
+    console.log("analytics",analytics);
+    if (platformStreamKey && !VERSION_LINKS[platformStreamKey]) {
         return null;
     }
 
     // Get the version and corresponding links based on the platform stream
-    const version = getVersionFromStream(platformStream);
+    const versions = getVersionsFromStream(platformStream);
     const links = getLinksForVersion(version);
 
     const handleLinkClick = (label, url) => {

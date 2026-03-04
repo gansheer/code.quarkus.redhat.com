@@ -49,10 +49,14 @@ export const DEFAULT_VERSION = 'com.redhat.quarkus.platform:3.27';
 /**
  * Gets the platform stream key from a platform stream identifier.
  *
- * @param {string} platformStream - The platform stream ID from the registry
+ * @param {object} platformStream - The platform stream ID from the registry
  * @returns {string} The platform stream key to use for looking up links
  */
-export function getVersionFromStream(platformStream) {
+export function getVersionsFromStream(platformStream) {
+    const platformVersions = getPlatformVersions(platformStream);
+    console.log(platformVersions);
+
+    const getVersionsFromStream = (version) => {}
     if (!platformStream) {
         return DEFAULT_VERSION;
     }
@@ -64,6 +68,16 @@ export function getVersionFromStream(platformStream) {
 
     // Fallback to default
     return DEFAULT_VERSION;
+}
+
+
+function getPlatformVersions(platformStream) {
+    const streams = platformStream || [];
+    return streams.map(stream => ({
+        key: stream.key,
+        platformVersion: stream.platformVersion,
+        quarkusCoreVersion: stream.quarkusCoreVersion
+    }));
 }
 
 /**

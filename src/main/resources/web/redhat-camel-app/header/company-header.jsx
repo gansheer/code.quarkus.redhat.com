@@ -7,6 +7,7 @@ import rhLogo from '../media/redhat-logo.svg';
 import {ResourcesNav} from './resources-nav';
 
 export function CompanyHeader(props) {
+    console.log("company-header", props);
     const analytics = useAnalytics();
     const linkClick = (e) => {
         const link = e.target.getAttribute('href');
@@ -17,7 +18,7 @@ export function CompanyHeader(props) {
 
     // Extract platform stream key from streamProps
     // The streamKey is passed via props.streamProps.streamKey
-    const platformStream = props.streamProps?.streamKey;
+    const platformStreamKey = props.streamProps?.streamKey;
 
     return (
         <>
@@ -41,7 +42,7 @@ export function CompanyHeader(props) {
                     )}
                 </>
             </LibCompanyHeader>
-            <ResourcesNav analytics={analytics} platformStream={platformStream} />
+            <ResourcesNav analytics={analytics} platformStream={props.streamProps} platformStreamKey={platformStreamKey} />
         </>
     );
 }
